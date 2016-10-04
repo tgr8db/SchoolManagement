@@ -59,204 +59,211 @@
 					int m1, m2, m3, m4, m5;
 				}m;
 
-		}s[40];
+		}sn;
 
 		public:
-
-			    void newAdmission(int n) {
+                void search(int gno){}  // this function has to be overloaded to be able to search with name , grno and class.
+				void search(int nam){}  // it normally displays the details 
+                void search(int div){}	// it also gives option to edit the detail OR go back 
+				void studentReport(int gno){}  // this function displays the report of a student..
+				void classReport(){} //this function displays the ranking of all the students (from stuDet.dat file).
+			    void newAdmission() {
+					
+					ofstream thefile ("stuDet.dat",ios::binary|ios::app|ios::out);
 					
 					gotoxy(4,6);
 					cout << " Student's Name : ";
-					 gets(s[n].name);
+					 gets(sn.name);
 					gotoxy(4,8);
 					cout << " Father's name  : ";
-					 gets(s[n].fName);
+					 gets(sn.fName);
 					gotoxy(4,10);
 					cout << " Mother's name  : ";
-					 gets(s[n].mName);
+					 gets(sn.mName);
 					gotoxy(4,12);
 					cout << " Class  : ";
-					 gets(s[n].division);
+					 gets(sn.division);
 					gotoxy(12,12);
 					cout << " Section  : ";
-					 gets(s[n].section);
+					 gets(sn.section);
 					gotoxy(4,14);
 					cout << " Building  : ";
-					 cin >> s[n].a.building;
+					 cin >> sn.a.building;
 					gotoxy(12,14);
 					cout << " Block  : ";
-					 cin >> s[n].a.block;
+					 cin >> sn.a.block;
 					gotoxy(20,14);
 					cout << " Road  : ";
-					 cin >> s[n].a.road;
+					 cin >> sn.a.road;
 					gotoxy(4,16);
 					cout << " ZIP  : ";
-					 cin >> s[n].a.zip;
+					 cin >> sn.a.zip;
 					gotoxy(12,16);
 					cout << " P.O. Box  : ";
-					 cin >> s[n].a.pobox;
+					 cin >> sn.a.pobox;
 					gotoxy(20,16);
 					cout << " Flat  : ";
-					 cin >> s[n].a.flat;
+					 cin >> sn.a.flat;
 					gotoxy(4,18);
 					cout << " Landline no. : ";
-					 cin >> s[n].p.home;
+					 cin >> sn.p.home;
 					gotoxy(4,20);
 					cout << " Mobile no. (One) : ";
-					 cin >> s[n].p.one;
+					 cin >> sn.p.one;
 					gotoxy(4,22);
 					cout << " Mobile no. (Two) : ";
-					 cin >> s[n].p.two;
+					 cin >> sn.p.two;
 					
+					thefile.write((char *)&s,sizeof(s));
+					thefile.close();
 			}
-				void editDetail(int gno) {    
-                  for(int i = 0; i < 40; i++)
-					  if(s.[i].grno==gno){
+				void editDetail(int gno) {      //this function has to be improved , it currently dosen't replace the older structure ;
+				                                // it instead keeps the old one AND appends a new structure into the file.. 
+				  ifstream thefile ("stuDet.dat",ios::binary|ios::in);
+
+				  while (!thefile.eof()) {
+					  
+					  thefile.read((char *)&sn,sizeof(sn));
+					  	  
+				   if(sn.grno==gno){
+					   
 					gotoxy(3,6);
                     cout << "You have to re-enter the detail even if you don't want to alter it. "					
 					gotoxy(4,6);
-					cout << " Student's Name : " << s[n].name ;
+					cout << " Student's Name : " << sn.name ;
 					 gotoxy(4,7);
-					 gets(s[n].name);
+					 gets(sn.name);
 					gotoxy(4,8);
-					cout << " Father's name  : " << s[n].fName;
+					cout << " Father's name  : " << sn.fName;
 					 gotoxy(4,9);
-					 gets(s[n].fName);
+					 gets(sn.fName);
 					gotoxy(4,10);
-					cout << " Mother's name  : " << s[n].mName;
+					cout << " Mother's name  : " << sn.mName;
 					 gotoxy(4,11);
-					 gets(s[n].mName);
+					 gets(sn.mName);
 					gotoxy(4,12);
-					cout << " Class  : " << s[n].division;
+					cout << " Class  : " << sn.division;
 					 gotoxy(4,13);
-					 gets(s[n].division);
+					 gets(sn.division);
 					gotoxy(12,12);
-					cout << " Section  : " << s[n].section;
+					cout << " Section  : " << sn.section;
 					 gotoxy(12,13);
-					 gets(s[n].section);
+					 gets(sn.section);
 					gotoxy(4,14);
-					cout << " Building  : " << s[n].a.building;
+					cout << " Building  : " << sn.a.building;
 					 gotoxy(4,15);
-					 cin >> s[n].a.building;
+					 cin >> sn.a.building;
 					gotoxy(12,14);
-					cout << " Block  : " << s[n].a.block;
+					cout << " Block  : " << sn.a.block;
 					 gotoxy(12,15);
-					 cin >> s[n].a.block;
+					 cin >> sn.a.block;
 					gotoxy(20,14);
-					cout << " Road  : " << s[n].a.road;
+					cout << " Road  : " << sn.a.road;
 					 gotoxy(20,15);
-					 cin >> s[n].a.road;
+					 cin >> sn.a.road;
 					gotoxy(4,16);
-					cout << " ZIP  : " << s[n].a.zip;
+					cout << " ZIP  : " << sn.a.zip;
 					 gotoxy(4,17);
-					 cin >> s[n].a.zip;
+					 cin >> sn.a.zip;
 					gotoxy(12,16);
-					cout << " P.O. Box  : " << s[n].a.pobox;
+					cout << " P.O. Box  : " << sn.a.pobox;
 					 gotoxy(12,17);
-					 cin >> s[n].a.pobox;
+					 cin >> sn.a.pobox;
 					gotoxy(20,16);
-					cout << " Flat  : " << s[n].a.flat;
+					cout << " Flat  : " << sn.a.flat;
 					 gotoxy(20,17);
-					 cin >> s[n].a.flat;
+					 cin >> sn.a.flat;
 					gotoxy(4,18);
-					cout << " Landline no. : " << s[n].p.home;
+					cout << " Landline no. : " << sn.p.home;
 					 gotoxy(4,19);
-					 cin >> s[n].p.home;
+					 cin >> sn.p.home;
 					gotoxy(4,20);
-					cout << " Mobile no. (One) : " << s[n].p.one;
+					cout << " Mobile no. (One) : " << sn.p.one;
 					 gotoxy(4,21);
-					 cin >> s[n].p.one;
+					 cin >> sn.p.one;
 					gotoxy(4,22);
-					cout << " Mobile no. (Two) : " << s[n].p.two;
+					cout << " Mobile no. (Two) : " << sn.p.two;
 					 gotoxy(4,23);
-					 cin >> s[n].p.two;
+					 cin >> sn.p.two;
 						  
 					  }
+				  }
+                    thefile.close();
+
+					ofstream thefile ("user.dat",ios::binary|ios::app|ios::out);
+					thefile.write((char *)&s,sizeof(s));
+					thefile.close();
+								
 				}
 				void displayDetails(int gno) {
 					
+				  ifstream thefile ("stuDet.dat",ios::binary|ios::in);
+
+				  while (!thefile.eof()) {
+					  
+					  thefile.read((char *)&sn,sizeof(sn));
+					  	  
+				   if(sn.grno==gno){
+					   
                      gotoxy(4,6);
-					cout << " Student's Name : " << s[n].name ;
-					 gotoxy(4,7);
-					 gets(s[n].name);
-					gotoxy(4,8);
-					cout << " Father's name  : " << s[n].fName;
-					 gotoxy(4,9);
-					 gets(s[n].fName);
-					gotoxy(4,10);
-					cout << " Mother's name  : " << s[n].mName;
-					 gotoxy(4,11);
-					 gets(s[n].mName);
-					gotoxy(4,12);
-					cout << " Class  : " << s[n].division;
-					 gotoxy(4,13);
-					 gets(s[n].division);
-					gotoxy(12,12);
-					cout << " Section  : " << s[n].section;
-					 gotoxy(12,13);
-					 gets(s[n].section);
-					gotoxy(4,14);
-					cout << " Building  : " << s[n].a.building;
-					 gotoxy(4,15);
-					 cin >> s[n].a.building;
-					gotoxy(12,14);
-					cout << " Block  : " << s[n].a.block;
-					 gotoxy(12,15);
-					 cin >> s[n].a.block;
-					gotoxy(20,14);
-					cout << " Road  : " << s[n].a.road;
-					 gotoxy(20,15);
-					 cin >> s[n].a.road;
-					gotoxy(4,16);
-					cout << " ZIP  : " << s[n].a.zip;
-					 gotoxy(4,17);
-					 cin >> s[n].a.zip;
-					gotoxy(12,16);
-					cout << " P.O. Box  : " << s[n].a.pobox;
-					 gotoxy(12,17);
-					 cin >> s[n].a.pobox;
-					gotoxy(20,16);
-					cout << " Flat  : " << s[n].a.flat;
-					 gotoxy(20,17);
-					 cin >> s[n].a.flat;
-					gotoxy(4,18);
-					cout << " Landline no. : " << s[n].p.home;
-					 gotoxy(4,19);
-					 cin >> s[n].p.home;
-					gotoxy(4,20);
-					cout << " Mobile no. (One) : " << s[n].p.one;
-					 gotoxy(4,21);
-					 cin >> s[n].p.one;
-					gotoxy(4,22);
-					cout << " Mobile no. (Two) : " << s[n].p.two;
-					 gotoxy(4,23);
-					 cin >> s[n].p.two;
+					cout << " Student's Name : " << sn.name ;
+					 gotoxy(4,8);
+					cout << " Father's name  : " << sn.fName;
+					 gotoxy(4,10);
+					cout << " Mother's name  : " << sn.mName;
+					 gotoxy(4,12);
+					cout << " Class  : " << sn.division;
+					 gotoxy(12,12);
+					cout << " Section  : " << sn.section;
+					 gotoxy(4,14);
+					cout << " Building  : " << sn.a.building;
+					 gotoxy(12,14);
+					cout << " Block  : " << sn.a.block;
+					 gotoxy(20,14);
+					cout << " Road  : " << sn.a.road;
+					 gotoxy(4,16);
+					cout << " ZIP  : " << sn.a.zip;
+					 gotoxy(12,16);
+					cout << " P.O. Box  : " << sn.a.pobox;
+					 gotoxy(20,16);
+					cout << " Flat  : " << sn.a.flat;
+					 gotoxy(4,18);
+					cout << " Landline no. : " << sn.p.home;
+					 gotoxy(4,20);
+					cout << " Mobile no. (One) : " << sn.p.one;
+					 gotoxy(4,22);
+					cout << " Mobile no. (Two) : " << sn.p.two;
+				   }
+				  }
+				  
+				  thefile.close();
 						  
 				}
-				void marksManager(int gno) {
+				void marksManager(int gno) {   // has to be integrated into the othere three functions...
                   for(int i = 0; i < 40; i++)
-					  if(s.[i].grno==gno){
-						  cout << "Enter mark One   : ";
-						  cout << "Enter mark Two   : ";
-						  cout << "Enter mark Three : ";
-						  cout << "Enter mark Four  : ";
-						  cout << "Enter mark Five  : ";
+					  if(sn.grno==gno){
+						  
+						  cout << "Enter mark One   (Physics)         : ";
+						  cout << "Enter mark Two   (Chemistry)       : ";
+						  cout << "Enter mark Three (Mathematics)     : ";
+						  cout << "Enter mark Four  (Computer Science): ";
+						  cout << "Enter mark Five  (English)         : ";
 					  }
 				}
 
 		}sD;
-		class userDetails
+		class userDetails    // has scope for improvement...
 		{
 			char firstname[10], lastname[10], securityq[10];
-			char username[12], password[9];
+			char username [12], password[9] ;
 
 		public: void resetData() 
 		        { 
-			        ofstream fout("users.dat", ios::app | ios::binary);
-			        username = ""; 
-					password = ""; 
-					firstname = ""; 
-					lastname = "";
+			        ofstream fout("users.dat", ios::app | ios::binary|ios::out);
+			        username = "  "; 
+					password = "  "; 
+					firstname = " "; 
+					lastname = "  ";
                 }
 			    void getUsername(char &un,int i)
 			          {
@@ -385,12 +392,7 @@ void mainMenu()
 
 
 }
-void search()
-{
-}
-void report()
-{
-}
+
 //***************************************************************************
 // Sub-menu definitions...                                                  #
 //***************************************************************************
