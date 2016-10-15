@@ -341,7 +341,7 @@ void passwordMenu() // at the end , add a loadingSequence()...
 			}
 }
 ****************************************************************************************************
-// report
+// report                                                                                          #
 ****************************************************************************************************
 void report()//using this function to choose between student and class report
 {
