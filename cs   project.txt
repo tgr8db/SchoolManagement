@@ -354,7 +354,7 @@ void report()//using this function to choose between student and class report
        case'classr':classreport();break;
        default:{cout<<"invalid choice;
                      loadingSequence();
-                     report();
+                     report();break;
       }
  }  
 void studentreport(int gno)//using this to read from file and display it
@@ -364,8 +364,7 @@ void studentreport(int gno)//using this to read from file and display it
               {
                 thefile.read((char *)&sn,sizeof(sn));
 					  	  
-				   if(sn.grno==gno)
-		                   {			   
+				  	   
                      gotoxy(4,5);
 				    if(sn.grno==gno){
 						  
