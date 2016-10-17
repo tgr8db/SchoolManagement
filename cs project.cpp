@@ -411,7 +411,38 @@ void studentreport(int gno)//using this to read from file and display it
                    
                  fin.close();
             }
-void classreport()
+void ranking()//this function adds all the marks and ranks the in order
+{
+    ifstream thefile("stuDet.dat,ios::binary|ios::in);
+        while(!thefile.eof())
+         {
+           thefile.read((char*)&sn,sizeof(sn));
+           
+         }
+              float TotalS=0;
+              int a[100],j=0,k=0;
+
+          for(int i=0;i<40;i++)
+           {
+              
+              TotalS=sn.m.m1+sn.m.m2+sn.m.m3+sn.m.m4+sn.m.m5/5;
+               a[j]=TotalS; 
+               j++;           
+            }
+              while(k>0)
+                  {              
+                    if(a[k]>a[k+1])
+                      {
+                       temp=a[k];
+                      }
+                       else if(a[k]<a[k+1])
+                        {
+                         temp=a[k+1];
+                        }
+                        a[k]=temp;
+                         k++;
+                  }                  
+	void classreport()
 {
     ifstream thefile ("stuDet.dat",ios::binary|ios::in);
     while(!thefile.eof())
