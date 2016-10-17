@@ -65,8 +65,9 @@
                 void search(int gno){}  // this function has to be overloaded to be able to search with name , grno and class.
 				void search(int nam){}  // it normally displays the details 
                 void search(int div){}	// it also gives option to edit the detail OR go back 
-				void studentReport(int gno){}  // this function displays the report of a student..
-				void classReport(){} //this function displays the ranking of all the students (from stuDet.dat file).
+				void report() // this function provides option for choosing student or class report 
+                                void studentReport(int gno){}  // this function displays the report of a student..
+	   			void classReport(){} //this function displays the ranking of all the students (from stuDet.dat file).
 			    void newAdmission() {
 					
 					ofstream thefile ("stuDet.dat",ios::binary|ios::app|ios::out);
@@ -338,9 +339,167 @@ void passwordMenu() // at the end , add a loadingSequence()...
 							break;
 				 }
 			}
-
-
 }
+****************************************************************************************************
+// report                                                                                          #
+****************************************************************************************************
+void report()//using this function to choose between student and class report
+{
+        char ch;
+
+	cout<<"\n\n\n\tRESULT MENU";
+	cout<<"\n\n\n\t1. Class Report";
+	cout<<"\n\n\t2. Student Report Card";
+	cout<<"\n\n\n\tEnter Choice (1/2)? ";
+	cin>>ch;
+	clrscr();
+	switch(ch)
+	{
+	case '1' : studentreport();
+	           break;
+	case '2' : classreport(); 
+	           break;
+        }
+ }  
+void studentreport(int gno)//using this to read from file and display it
+{
+          ifstream thefile ("stuDet.dat",ios::binary|ios::in);
+              while(!fin.eof())
+              {
+                thefile.read((char *)&sn,sizeof(sn));
+		gotoxy(4,5);
+				    if(sn.grno==gno){
+				
+				        cout << " Student's Name : " << sn.name ;
+					 gotoxy(4,8);
+					cout << " Father's name  : " << sn.fName;
+					 gotoxy(4,10);
+					cout << " Mother's name  : " << sn.mName;
+					 gotoxy(4,12);
+					cout << " Class  : " << sn.division;
+					 gotoxy(12,12);
+					cout << " Section  : " << sn.section;
+					 gotoxy(4,14);
+					cout << " Building  : " << sn.a.building;
+					 gotoxy(12,14);
+					cout << " Block  : " << sn.a.block;
+					 gotoxy(20,14);
+					cout << " Road  : " << sn.a.road;
+					 gotoxy(4,16);
+					cout << " ZIP  : " << sn.a.zip;
+					 gotoxy(12,16);
+					cout << " P.O. Box  : " << sn.a.pobox;
+					 gotoxy(20,16);
+					cout << " Flat  : " << sn.a.flat;
+					 gotoxy(4,18);
+					cout << " Landline no. : " << sn.p.home;
+					 gotoxy(4,20);
+					cout << " Mobile no. (One) : " << sn.p.one;
+					 gotoxy(4,22);
+					cout << " Mobile no. (Two) : " << sn.p.two;
+				        cout << "      Physics           : "<<sn.m.m1;
+                                         gotoxy(4,24);
+				        cout << "      Chemistry         : "<<sn.m.m2;
+                                         gotoxy(4,26);  
+			                cout << "      Mathematics       : "<<sn.m.m3;
+                                         gotoxy(4,28);
+			                cout << "      Computer Science  : "<<sn.m.m4;
+                                         gotoxy(4,30);
+			                cout << "      English           : "<<sn.m.m5;
+                                         gotoxy(4,32);  	
+                                  }
+                   
+                 fin.close();
+            }
+void ranking()//this function adds all the marks and ranks the in order
+{
+    ifstream thefile("stuDet.dat,ios::binary|ios::in);
+        while(!thefile.eof())
+         {
+           thefile.read((char*)&sn,sizeof(sn));
+           
+         }
+              float TotalS=0;
+              int a[100],j=0,k=0;
+
+          for(int i=0;i<40;i++)
+           { 
+                 if (sn.grno==gno)              
+              TotalS=sn.m.m1+sn.m.m2+sn.m.m3+sn.m.m4+sn.m.m5/5;
+               a[j]=TotalS; 
+               j++;           
+            }
+              while(k>0)
+                  {              
+                    if(a[k]>a[k+1])
+                      {
+                       temp=a[k];
+                      }
+                       else if(a[k]<a[k+1])
+                        {
+                         temp=a[k+1];
+                        }
+                        a[k]=temp;
+                         k++;
+                  }                                                
+}           
+void classreport()
+{
+    ifstream thefile ("stuDet.dat",ios::binary|ios::in);
+    while(!thefile.eof())
+    {
+      if(!thefile)
+	{
+		cout<<"File could not be open !! Press any Key...";
+		getch();
+		return;
+	}
+     thefile.read((char *)&sn,sizeof(sn));                                   
+        {
+        	cout << " Student's Name : " << sn.name<<'\t' ;     
+					 gotoxy(4,8);
+					cout << " Father's name  : " << sn.fName<<'\t';
+					 gotoxy(4,10);
+					cout << " Mother's name  : " << sn.mName<<'\t';
+					 gotoxy(4,12);
+					cout << " Class  : " << sn.division<<'\t';
+					 gotoxy(12,12);
+					cout << " Section  : " << sn.section<<'\t';
+					 gotoxy(4,14);
+					cout << " Building  : " << sn.a.building<<'\t';
+					 gotoxy(12,14);
+					cout << " Block  : " << sn.a.block<<'\t';
+					 gotoxy(20,14);
+					cout << " Road  : " << sn.a.road<<'\t';
+					 gotoxy(4,16);
+					cout << " ZIP  : " << sn.a.zip<<'\t';
+					 gotoxy(12,16);
+					cout << " P.O. Box  : " << sn.a.pobox<<'\t';
+					 gotoxy(20,16);
+					cout << " Flat  : " << sn.a.flat<<'\t';
+					 gotoxy(4,18);
+					cout << " Landline no. : " << sn.p.home<<'\t';
+					 gotoxy(4,20);
+					cout << " Mobile no. (One) : " << sn.p.one<<'\t';
+					 gotoxy(4,22);
+					cout << " Mobile no. (Two) : " << sn.p.two<<'\t';
+				        cout << "      Physics           : "<<sn.m.m1<<'\t';
+                                         gotoxy(4,24);
+				        cout << "      Chemistry         : "<<sn.m.m2<<'\t';
+                                         gotoxy(4,26);  
+			                cout << "      Mathematics       : "<<sn.m.m3<<'\t';
+                                         gotoxy(4,28);
+			                cout << "      Computer Science  : "<<sn.m.m4<<'\t';
+                                         gotoxy(4,30);
+			                cout << "      English           : "<<sn.m.m5<<'\t';
+                                         gotoxy(4,32); 
+	}
+	getch();
+	thefile.close();
+     
+ }  
+    
+    
 void mainMenu()
 {
 	borderCreator();
