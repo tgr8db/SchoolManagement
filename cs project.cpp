@@ -65,7 +65,8 @@
                 void search(int gno){}  // this function has to be overloaded to be able to search with name , grno and class.
 				void search(int nam){}  // it normally displays the details 
                 void search(int div){}	// it also gives option to edit the detail OR go back 
-				void report() // this function provides option for choosing student or class report 
+				void ranking()// this function helps in ranks the marks of students in order
+			        void report() // this function provides option for choosing student or class report 
                                 void studentReport(int gno){}  // this function displays the report of a student..
 	   			void classReport(){} //this function displays the ranking of all the students (from stuDet.dat file).
 			    void newAdmission() {
@@ -424,7 +425,7 @@ void ranking()//this function adds all the marks and ranks the in order
 
           for(int i=0;i<40;i++)
            {
-              
+              if(sn.grno==gno)
               TotalS=sn.m.m1+sn.m.m2+sn.m.m3+sn.m.m4+sn.m.m5/5;
                a[j]=TotalS; 
                j++;           
