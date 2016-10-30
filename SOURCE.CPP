@@ -343,7 +343,31 @@ void forgotPassword()
 //***************************************************************************
 // studentDetails_Sub-menu definitions...                                         #
 //***************************************************************************
-	
+	void studentDetails::ranking(){
+         ifstream thefile ("stuDet.dat",ios::binary|ios::in);
+		while(!thefile.eof()) {
+			thefile.read((char *)&sn,sizeof(sn));
+                               }					  
+				     if(grno==gno)
+	                   {
+					   cout<<sn.name;
+                       cout<<sn.m.avg;
+                         b=sn.m.avg;
+					     c=sn.name;
+					    
+					     int* rank(double a[],int b, ){
+                             int temp[b];
+	                        for(int i=0;i<b;i++){
+		                       int rank=0;
+		                       for(int j=0;j<b;j++){
+			                if(a[j]<a[i]){  
+				               rank++;   
+					}
+                                            temp[i]=rank;	                     
+                                             return temp;
+				                        }    
+		}thefile.close();
+	}
 void studentDetails::report() {
 
 		int choice;
