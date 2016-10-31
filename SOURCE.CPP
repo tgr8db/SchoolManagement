@@ -9,13 +9,13 @@
 const char put = 219;   //Dosen't work... IDK why..
 
 		/* CURRENT PROBLEMS
-			  Line :
+			  Line : 571,644
 			  Landline no. of student dosen't get input
-			  Line :
+			  Line : 71
 			  Ranking logic missing...
-			  Line :
+			  Line : 336
 			  User's password dosen't match (is never stored)..
-			  Line :
+			  Line : 586
 			  EditDetail has some logical error.. (dosen't work...)
 		  */
 //***************************************************************************
