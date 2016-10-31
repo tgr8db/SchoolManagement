@@ -6,6 +6,7 @@
 #include <ctype.h>
 #include <stdlib.h>
 
+const char put=219;  //Dosen't work... IDK why..
 
 //***************************************************************************
 //Menu Function Declarations...                                             #
@@ -92,23 +93,22 @@ void main()
 
 void projectLogo()
 {
-	cout << "     ▄████████     ▄▄▄▄███▄▄▄▄        ▄████████ " << endl;
-	cout << "    ███    ███   ▄██▀▀▀███▀▀▀██▄     ███    ███ " << endl;
-	cout << "    ███    █▀    ███   ███   ███     ███    █▀  " << endl;
-	cout << "    ███          ███   ███   ███     ███        " << endl;
-	cout << "  ▀███████████   ███   ███   ███   ▀███████████ " << endl;
-	cout << "           ███   ███   ███   ███            ███ " << endl;
-	cout << "     ▄█    ███   ███   ███   ███      ▄█    ███ " << endl;
-	cout << "   ▄████████▀  █  ▀█   ███   █▀  █  ▄████████▀  " << endl;
+	cout << "               )\.--.          )\   )\           )\.--.  " << endl;
+	cout << "              (   ._.'        (  ',/ /          (   ._.' " << endl;
+	cout << "               `-.`.           )    (            `-.`.   " << endl;
+	cout << "              ,_ (  \    ,_   (  \(\ \    ,_    ,_ (  \  " << endl;
+	cout << "             (  '.)  )  (  \   `.) /  )  (  \  (  '.)  ) " << endl;
+	cout << "              '._,_.'    ).'       '.(    ).'   '._,_.'  " << endl;
 }
+
 void openingCredits()
 {
 	loadingSequence();
-	projectLogo();
 
 	gotoxy(2, 2);
 	cout << "For The World" << endl;
 	projectLogo();
+	borderCreator();
 	gotoxy(19, 11);
 	cout << "The School Managment System....";
 	gotoxy(24, 16);
@@ -122,34 +122,35 @@ void openingCredits()
 	gotoxy(30, 21);
 	cout << "Member Three :  Alwin Sevi";
 
-	delay(1000000);
+	delay(1000);
+	delay(1000);
 	loadingSequence();
 }
 //***************************************************************************
 // Menu definitions...                                                      #
 //***************************************************************************
-void passwordMenu() 
+void passwordMenu()
 {
-		char option;		
+		char option;
 		 gotoxy(18, 15);
 		cout << "(If no , you will be required to create a new user...)";
-	     gotoxy(20, 10);
+		  gotoxy(20, 10);
 		cout << "Do you have an account (y/n) : ";
-        cin >> option;
-		
+		  cin >> option;
+
 		loadingSequence();
 
 			switch (option)
 			{
-			     case 'y': {userCheck(); break;}
+				 case 'y': {userCheck(); break;}
 				 case 'n': {newUser();   break;}
 				 default : { gotoxy(10,15);
-						cout << "Unexpected error..."<<endl;
-						    cout << "Restarting...";
-						    delay(100000);
-						    loadingSequence();
-						    passwordMenu();
-							break;
+								cout << "Unexpected error..."<<endl;
+								cout << "Restarting...";
+								delay(1000);
+								loadingSequence();
+								passwordMenu();
+								break;
 				 }
 			}
 }
@@ -176,22 +177,22 @@ void mainMenu()
 	 gotoxy(30, 18);
 	cout << "Enter your choice : ";
 	cin >> choice;
-	
 	loadingSequence();
-	delay(10000);
+	delay(100);
 
 	switch (choice) {
 	case 1: {sD.newAdmission(); break;}
-    case 2: {search();          break;}
+	case 2: {search();          break;}
 	case 3: {int gno;
-	          gotoxy(30,22);
-			 cout << "Enter the GR. no. of the student : ";
-              cin>>gno;			 
-		     sD.editDetail(gno);
-					    break;
+				 gotoxy(15,15);
+				cout << "Enter the GR. no. of the student : ";
+				  cin>>gno;
+			  loadingSequence();
+			  sD.editDetail(gno);
+						 break;
 		  }
 	case 4: {sD.report();       break;}
-	case 5:	{passwordMenu();    break;}
+	case 5: {passwordMenu();    break;}
 	case 6: exit(1);
 	default:{ cout << "There was some unexpected error ... ";
 			  passwordMenu();
@@ -203,8 +204,8 @@ void mainMenu()
 //***************************************************************************
 // Search-menu definitions...                                               #
 //***************************************************************************
-void search(){ 
-   gotoxy(4,4);
+void search(){
+	gotoxy(4,4);
   cout<<"SearchMenu";
   loadingSequence();
   mainMenu();
@@ -213,55 +214,58 @@ void search(){
 // Password_Sub-menu definitions...                                         #
 //***************************************************************************
 void newUser()
-{ 
-  char repass[9];
-  ofstream fout("users.dat",ios::app|ios::binary);
-   gotoxy(6, 2);
+{  userDetails u;
+  char repass[9],rp;
+  ofstream fout("user.dat",ios::app|ios::binary);
+	gotoxy(6, 2);
   cout << "Please file in the details given below : ";
-   gotoxy(15, 4);
+	gotoxy(15, 4);
   cout << "Your first name : ";
-  gets(uD.firstname);
-   gotoxy(15, 5);
+  gets(u.firstname);
+	gotoxy(15, 5);
   cout << "Your last name  : ";
-  gets(uD.lastname);
-   gotoxy(15, 6);
+  gets(u.lastname);
+	gotoxy(15, 6);
   cout << "Enter a username : ";
-  gets(uD.username);
-   gotoxy(17,7);
+  gets(u.username);
+	gotoxy(15,7);
   cout << "Enter a new password (8 Characters) : ";
   for (int i=0;i<8;i++)
-   {
-	 uD.password[i] = getch();
+	{
+	 u.password[i] = getch();
 	 cout << "*";
-   }
-     gotoxy(17,8);
-   cout << "Re-enter the password:";
-    for (i = 0;i < 8;i++)
-    {
-       repass[i] = getch();
-       cout << "*";
-    }
-	 gotoxy(17,7);
-    cout << "Enter your personal secret sequrity name : ";
-    gets(uD.securityn);
-
-    if (strcmp(uD.password,repass)==0)
-    {
-	cout << "Saving... Please wait...";
-		fout.write((char*)&uD, sizeof(uD));
-				delay(100);
-				cout << "Password directory has been updated ...";
-				delay(100);
-				loadingSequence();
-				mainMenu();
+	}
+	  gotoxy(16,8);
+	cout << "Re-enter the password : ";
+	 for (i = 0;i < 8;i++)
+	 {
+		 repass[i] = getch();
+		 cout << "*";
+	 }
+		gotoxy(16,12);
+		cout<<u.password<<" "<<repass;
+		delay(2000);
+	 if (strcmp(u.password,repass)==0)
+	{   gotoxy(16,9);
+		cout << "Enter your personal secret sequrity name : ";
+		gets(u.securityn);
+		 gotoxy(17,16);
+		cout << "Saving... Please wait...";
+		fout.write((char*)&u, sizeof(u));
+		 delay(500);
+		 gotoxy(17,17);
+		cout << "Password directory has been updated ...";
+		delay(250);
+		loadingSequence();
+		mainMenu();
 	}
 	else
-    {
-    	cout << "There is some unexpected problem....";
-		delay(100);
+	 { clrscr();
+		cout << "There is some unexpected problem....";
+		delay(500);
 		clrscr();
 		cout << "Restarting...";
-		delay(100);
+		delay(500);
 		loadingSequence();
 		passwordMenu();
 	}
@@ -269,25 +273,25 @@ void newUser()
 }
 void userCheck()
 {
-		ifstream fin("users.dat",ios::in|ios::binary);
+		ifstream fin("user.dat",ios::in|ios::binary);
 		 int flagu = 0, flagp = 0;
 		 char usn[12], pwd[9];
-		  gotoxy(26, 3);
+		  gotoxy(10, 5);
 		cout << "Welcome back !!! ";
 		  gotoxy(29,10);
 		cout << "Username : ";
 		  gets(usn);
 		  gotoxy(29,11);
 		cout << "Password : ";
-			for(int i=0;i < 9;i++ )
+			for(int i=0;i < 8;i++ )
 			{
-		      pwd[i] = getch();
+				pwd[i] = getch();
 			  cout << "*";
 			}
 
 		while(!fin.eof())
-		{   
-		fin.read((char*)&uD,sizeof(uD));
+		{
+			fin.read((char*)&uD,sizeof(uD));
 			if (strcmpi(uD.username, usn) == 0)
 				flagu = 1;
 			if (strcmp(uD.password, pwd) == 0)
@@ -296,7 +300,7 @@ void userCheck()
 	if (flagu == 1 && flagp == 1)
 	{  gotoxy(29,12);
 			cout << "Access granted... ";
-		    fin.close();
+			 fin.close();
 			delay(100);
 			loadingSequence();
 			mainMenu();
@@ -304,24 +308,25 @@ void userCheck()
 		else {
 			char erch;
 			fin.close();
-			 gotoxy(29, 18);
+			 gotoxy(10, 18);
 			cout << "The input details are wrong.....";
-			 gotoxy(29, 19);
-			cout << "Press any key (except f,F) to try again ...";
-			cout << "Press F key if you forgot the password . (f/F)";
+			 gotoxy(10, 19);
+			cout << "Press any key (except f,F) to go back to the previous menu ...";
+			 gotoxy(10, 20);
+			cout << "Press F key if you forgot the password . (f/F) : ";
 			cin >> erch;
-	     loadingSequence();
+		  loadingSequence();
 			if (erch == 'f' || erch == 'F')
 				forgotPassword();
 			else
 			{
-				delay(100);
+				delay(250);
 				passwordMenu();
 			}
 		}
 }
 void forgotPassword()
-    {
+	 {
 		ifstream fin("users.dat", ios::in | ios::binary);
 		char ans[10];
 		 gotoxy(29, 10);
@@ -329,6 +334,7 @@ void forgotPassword()
 		 gotoxy(29, 11);
 		gets(ans);
 		 loadingSequence();
+
 
 		if (strcmp(uD.securityn, ans) == 0) {
 			delay(100);
@@ -341,33 +347,9 @@ void forgotPassword()
 	}
 
 //***************************************************************************
-// studentDetails_Sub-menu definitions...                                         #
+// studentDetails_Sub-menu definitions...                                   #
 //***************************************************************************
-	void studentDetails::ranking(){
-         ifstream thefile ("stuDet.dat",ios::binary|ios::in);
-		while(!thefile.eof()) {
-			thefile.read((char *)&sn,sizeof(sn));
-                               }					  
-				     if(grno==gno)
-	                   {
-					   cout<<sn.name;
-                       cout<<sn.m.avg;
-                         b=sn.m.avg;
-					     c=sn.name;
-					    
-					     int* rank(double a[],int b, ){
-                             int temp[b];
-	                        for(int i=0;i<b;i++){
-		                       int rank=0;
-		                       for(int j=0;j<b;j++){
-			                if(a[j]<a[i]){  
-				               rank++;   
-					}
-                                            temp[i]=rank;	                     
-                                             return temp;
-				                        }    
-		}thefile.close();
-	}
+	
 void studentDetails::report() {
 
 		int choice;
@@ -633,11 +615,11 @@ void studentDetails::inputMarks() {
 	   cin >> sn.m.m4;
 	   gotoxy(8,28);
 	  cout << "Enter mark Five  (English)         : ";
-       cin >> sn.m.m5;
+		 cin >> sn.m.m5;
 
-     sn.m.avg=sn.m.m1+sn.m.m2+sn.m.m3+sn.m.m4+sn.m.m5;
+	  sn.m.avg=sn.m.m1+sn.m.m2+sn.m.m3+sn.m.m4+sn.m.m5;
 }
-	
+
 //***************************************************************************
 // Helper tool definitions...                                               #
 //***************************************************************************
@@ -650,14 +632,14 @@ void borderCreator()
 			for (int x = 1; x < 80; x++)
 			{
 				gotoxy(x, y);
-				cout << "█";
+				cout << put;
 			}
 		else
 		{
 			gotoxy(1, y);
-			cout << "█";
+			cout << put;
 			gotoxy(79, y);
-			cout << "█";
+			cout << put;
 		}
 	}
 	gotoxy(2, 2);
@@ -665,16 +647,16 @@ void borderCreator()
 }
 void loadingSequence()
 {
-    clrscr();
+	 clrscr();
 
-    for (int y = 0; y < 26; y++)
+	 for (int y = 0; y < 26; y++)
 		for (int x = 0; x < 80; x++)
-		       {
+				 {
 			gotoxy(x,y);
-			cout << "█";
-			delay(2);
+			cout << put;
+			delay(35);
 		}
-	delay(100);
+	delay(250);
 	clrscr();
 	delay(250);
 	borderCreator();
@@ -682,5 +664,7 @@ void loadingSequence()
 void delay(int x)
 {
  for (int i = 1; i < x; i++)
-	 for (int i = 0; i < x; i++)
+	 for (int j = 0; j < x; j++)
+		  for (int k = 0; k < x/4; k++);
+
 }
